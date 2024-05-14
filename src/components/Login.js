@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { loginSuccess } from '../actions';
-import { Form, Alert, Button, Container, Row, Col } from 'react-bootstrap';
+import { Form, Alert, Button, Container, Row, Col, Card, Image } from 'react-bootstrap';
 //import bcrypt from 'bcrypt';
 
 function Login() {
@@ -42,24 +42,34 @@ function Login() {
     };
 
     return (
-        <Container fluid="md">
-            <h2>Page login</h2>
-            {error && <Alert key="danger" variant="danger">{error}</Alert>}
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="username">
-                    <Form.Label>Username:</Form.Label>
-                    <Form.Control type="text" placeholder="Enter username" value={username} onChange={handleUsernameChange} />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="password">
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control type="password" placeholder="Enter password" value={password} onChange={handlePasswordChange} />
-                </Form.Group>
-                <Row className="text-center">
-                    <Col>
-                        <Button variant="primary" type="submit">Login</Button>{' '}
-                    </Col>
-                </Row>
-            </Form>
+        <Container className="mt-5">
+            <Row className="mx-auto text-center" style={{ width: '40rem' }}>
+                <Col><h1>Employee Poll</h1></Col>
+            </Row>
+            <Row className="mx-auto" style={{ width: '40rem' }}>
+                <Col className="mt-3 mb-3"><Image src="" roundedCircle /></Col>
+            </Row>
+            <Card className="mx-auto" style={{ width: '40rem' }}>
+                <Card.Header as="h5">Page login</Card.Header>
+                <Card.Body>
+                    {error && <Alert key="danger" variant="danger">{error}</Alert>}
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" controlId="username">
+                            <Form.Label>Username:</Form.Label>
+                            <Form.Control type="text" placeholder="Enter username" value={username} onChange={handleUsernameChange} />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="password">
+                            <Form.Label>Password:</Form.Label>
+                            <Form.Control type="password" placeholder="Enter password" value={password} onChange={handlePasswordChange} />
+                        </Form.Group>
+                        <Row className="text-center">
+                            <Col>
+                                <Button variant="primary" type="submit">Login</Button>{' '}
+                            </Col>
+                        </Row>
+                    </Form>
+                </Card.Body>
+            </Card>
         </Container>
     );
 }

@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const rootReducer = combineReducers({
     authUser,
-    users
+    users,
 })
 
 export default rootReducer
