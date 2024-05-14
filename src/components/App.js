@@ -8,6 +8,7 @@ import NavigationBar from './NavigationBar';
 import Home from "./Home";
 import Leaderboard from "./Leaderboard";
 import PollCreation from "./PollCreation";
+import ProtectedRoute from './ProtectedRoute';
 import { _getUsers } from "../utils/_DATA";
 
 function App() {
@@ -26,9 +27,11 @@ function App() {
         <NavigationBar />
         <Routes>
           <Route path="/login" element={isLoggedIn ? <Navigate replace to="/" /> : <Login />} />
-          <Route path="/" element={<Home />} />
-          <Route path="leaderboard" element={<Leaderboard />} />
-          <Route path="new-poll" element={<PollCreation />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/new-poll" element={<PollCreation />} />
+          </Route>
         </Routes>
       </Fragment>
 
