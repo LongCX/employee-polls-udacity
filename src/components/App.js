@@ -1,24 +1,30 @@
-import React from 'react';
 import { useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes, Navigate } from "react-router-dom";
-import { setListUsers } from '../actions';
+import { setListUsers, setListQuestions, startLoading, stopLoading } from '../actions';
 import Login from "./Login";
 import NavigationBar from './NavigationBar';
 import Home from "./Home";
 import Leaderboard from "./Leaderboard";
 import PollCreation from "./PollCreation";
 import ProtectedRoute from './ProtectedRoute';
-import { _getUsers } from "../utils/_DATA";
+import Poll from "./Poll";
+import { getInitData } from "../utils/_DATA";
 
 function App() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   useEffect(() => {
-    _getUsers().then((users) => {
+    dispatch(startLoading());
+
+    getInitData().then(({ users, questions }) => {
       dispatch(setListUsers(users));
+      dispatch(setListQuestions(questions));
+
+      dispatch(stopLoading());
     })
+
   }, [])
 
   return (
@@ -30,11 +36,11 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<Home />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/new-poll" element={<PollCreation />} />
+            <Route path="/new" element={<PollCreation />} />
+            <Route path="/questions/:questionId" element={<Poll />} />
           </Route>
         </Routes>
       </Fragment>
-
     </div>
   );
 }

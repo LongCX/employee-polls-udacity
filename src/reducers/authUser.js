@@ -1,7 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { loginSuccess, logout } from '../actions'
 
-
 const initialState = {
   isLoggedIn: false,
   username: '',

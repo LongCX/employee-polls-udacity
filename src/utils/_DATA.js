@@ -132,15 +132,15 @@ let users = {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
   }
   
-  export function _getUsers () {
+  function _getUsers () {
     return new Promise((resolve) => {
-      setTimeout(() => resolve({...users}), 1000)
+      setTimeout(() => resolve({...users}), 500)
     })
   }
   
-  export function _getQuestions () {
+  function _getQuestions () {
     return new Promise((resolve) => {
-      setTimeout(() => resolve({...questions}), 1000)
+      setTimeout(() => resolve({...questions}), 500)
     })
   }
   
@@ -211,3 +211,12 @@ let users = {
       }, 500)
     })
   }
+
+  export const getInitData = () => {
+    return Promise.all([_getUsers(), _getQuestions()]).then(
+      ([users, questions]) => ({
+        users,
+        questions,
+      })
+    );
+  };

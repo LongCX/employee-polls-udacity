@@ -1,6 +1,6 @@
 import { Container } from 'react-bootstrap';
 
-function Leaderboard() {
+function Poll() {
 
     return (
         <Container fluid='true'>
@@ -9,4 +9,4 @@ function Leaderboard() {
     );
 }
 
-export default Leaderboard;
+export default Poll;

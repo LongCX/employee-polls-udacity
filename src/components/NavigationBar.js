@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
@@ -19,7 +18,7 @@ const NavigationBar = () => {
         <Nav fill variant="underline" defaultActiveKey="/" className="me-auto">
           <Nav.Link as={NavLink} to="/">Home</Nav.Link>
           <Nav.Link as={NavLink} to="/leaderboard">Leaderboard</Nav.Link>
-          <Nav.Link as={NavLink} to="/new-poll">New Poll</Nav.Link>
+          <Nav.Link as={NavLink} to="/new">New Poll</Nav.Link>
         </Nav>
         {
           infoAuth.isLoggedIn ?

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { loginSuccess } from '../actions';
@@ -44,18 +44,18 @@ function Login() {
     return (
         <Container className="mt-5">
             <Row className="mx-auto text-center" style={{ width: '40rem' }}>
-                <Col><h1>Employee Poll</h1></Col>
+                <Col><h1>Employee Polls</h1></Col>
             </Row>
             <Row className="mx-auto" style={{ width: '40rem' }}>
                 <Col className="mt-3 mb-3"><Image src="" roundedCircle /></Col>
             </Row>
             <Card className="mx-auto" style={{ width: '40rem' }}>
-                <Card.Header as="h5">Page login</Card.Header>
+                <Card.Header as="h5">Log in</Card.Header>
                 <Card.Body>
                     {error && <Alert key="danger" variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="username">
-                            <Form.Label>Username:</Form.Label>
+                            <Form.Label>User:</Form.Label>
                             <Form.Control type="text" placeholder="Enter username" value={username} onChange={handleUsernameChange} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="password">
@@ -64,7 +64,7 @@ function Login() {
                         </Form.Group>
                         <Row className="text-center">
                             <Col>
-                                <Button variant="primary" type="submit">Login</Button>{' '}
+                                <Button variant="primary" type="submit">Login</Button>
                             </Col>
                         </Row>
                     </Form>
