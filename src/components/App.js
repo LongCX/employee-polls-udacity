@@ -10,6 +10,7 @@ import Leaderboard from "../page/Leaderboard";
 import PollCreation from "../page/PollCreation";
 import ProtectedRoute from './ProtectedRoute';
 import Poll from "../page/Poll";
+import NotFound from "../page/NotFound";
 import { getInitData } from "../utils/_DATA";
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
             <Route path="/new" element={<PollCreation />} />
             <Route path="/questions/:questionId" element={<Poll />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Fragment>
     </div>
