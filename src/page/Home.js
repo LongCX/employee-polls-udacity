@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux';
-import { Container, Card, Row } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
 import PollCard from '../components/PollCard';
 
 function Home() {

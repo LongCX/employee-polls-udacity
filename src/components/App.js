@@ -1,7 +1,8 @@
 import { useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes, Navigate } from "react-router-dom";
-import { Container, Spinner } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Spinner from 'react-bootstrap/Spinner';
 import { setListUsers, setListQuestions, startLoading, stopLoading } from '../actions';
 import Login from "../page/Login";
 import NavigationBar from './NavigationBar';
@@ -27,7 +28,7 @@ function App() {
 
       dispatch(stopLoading());
     })
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="App">

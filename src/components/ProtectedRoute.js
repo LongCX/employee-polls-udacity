@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Card } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
 import { Link, Outlet } from 'react-router-dom'
 
 function ProtectedRoute() {

@@ -1,4 +1,6 @@
-import { Card, Button, Col } from 'react-bootstrap';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import formatDate from '../utils/helpers';
 
 function PollCard({ poll }) {

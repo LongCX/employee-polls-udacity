@@ -1,7 +1,15 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { Form, Alert, Button, Container, Row, Col, Card, Image, Spinner } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import Image from 'react-bootstrap/Image';
+import Spinner from 'react-bootstrap/Spinner';
 import { createPoll, startLoading, stopLoading } from '../actions';
 import { _saveQuestion } from '../utils/_DATA';
 

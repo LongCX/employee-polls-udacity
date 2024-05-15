@@ -1,4 +1,5 @@
-import { Alert, Container } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Alert from 'react-bootstrap/Alert';
 
 function NotFound() {
 
