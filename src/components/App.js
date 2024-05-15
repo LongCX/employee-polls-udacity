@@ -1,7 +1,7 @@
 import { useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes, Navigate } from "react-router-dom";
-import { setListUsers, setListQuestions, startLoading, stopLoading } from '../actions';
+import { setListUsers, setListQuestions } from '../actions';
 import Login from "./Login";
 import NavigationBar from './NavigationBar';
 import Home from "./Home";
@@ -16,15 +16,11 @@ function App() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   useEffect(() => {
-    dispatch(startLoading());
-
     getInitData().then(({ users, questions }) => {
       dispatch(setListUsers(users));
       dispatch(setListQuestions(questions));
 
-      dispatch(stopLoading());
     })
-
   }, [])
 
   return (

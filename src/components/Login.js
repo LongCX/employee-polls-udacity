@@ -56,7 +56,7 @@ function Login() {
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="username">
                             <Form.Label>User:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter username" value={username} onChange={handleUsernameChange} />
+                            <Form.Control type="text" autoComplete='true' placeholder="Enter username" value={username} onChange={handleUsernameChange} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="password">
                             <Form.Label>Password:</Form.Label>
