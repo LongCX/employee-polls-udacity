@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
-import { Button, Container, Card, Row, Col } from 'react-bootstrap';
-import formatDate from '../utils/helpers';
+import { Container, Card, Row } from 'react-bootstrap';
+import PollCard from '../components/PollCard';
 
 function Home() {
+    const noData = <span>Not data to display</span>;
     // Get list answer polls of user
     const infoAuth = useSelector((state) => state.authUser);
     const answerOfUser = (useSelector((state) => state.users.listUsers))[infoAuth.username];
@@ -25,18 +26,8 @@ function Home() {
                     <Row>
                         {
                             listPollsNew.length > 0 ? listPollsNew.map((poll) => (
-                                <Col xs={3} key={poll.id}>
-                                    <Card className="mb-2 mt-2" style={{ width: '13rem' }}>
-                                        <Card.Body>
-                                            <Card.Title>{poll.author}</Card.Title>
-                                            <Card.Subtitle className="mb-2 text-muted">
-                                                {formatDate(poll.timestamp)}
-                                            </Card.Subtitle>
-                                            <Button variant="primary">Show</Button>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                            )) : <span>Not data to display</span>
+                                <PollCard key={poll.id} poll={poll} />
+                            )) : noData
                         }
                     </Row>
                 </Card.Body>
@@ -47,18 +38,8 @@ function Home() {
                     <Row>
                         {
                             listPollsDone.length > 0 ? listPollsDone.map((poll) => (
-                                <Col xs={3} key={poll.id}>
-                                    <Card className="mb-2 mt-2" style={{ width: '13rem' }}>
-                                        <Card.Body>
-                                            <Card.Title>{poll.author}</Card.Title>
-                                            <Card.Subtitle className="mb-2 text-muted">
-                                                {formatDate(poll.timestamp)}
-                                            </Card.Subtitle>
-                                            <Button variant="primary">Show</Button>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                            )) : <span>Not data to display</span>
+                                <PollCard key={poll.id} poll={poll} />
+                            )) : noData
                         }
                     </Row>
                 </Card.Body>

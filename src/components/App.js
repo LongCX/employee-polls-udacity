@@ -2,13 +2,13 @@ import { useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes, Navigate } from "react-router-dom";
 import { setListUsers, setListQuestions } from '../actions';
-import Login from "./Login";
+import Login from "../page/Login";
 import NavigationBar from './NavigationBar';
-import Home from "./Home";
-import Leaderboard from "./Leaderboard";
-import PollCreation from "./PollCreation";
+import Home from "../page/Home";
+import Leaderboard from "../page/Leaderboard";
+import PollCreation from "../page/PollCreation";
 import ProtectedRoute from './ProtectedRoute';
-import Poll from "./Poll";
+import Poll from "../page/Poll";
 import { getInitData } from "../utils/_DATA";
 
 function App() {
