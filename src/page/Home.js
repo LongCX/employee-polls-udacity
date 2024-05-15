@@ -25,8 +25,8 @@ function Home() {
                 <Card.Body>
                     <Row>
                         {
-                            listPollsNew.length > 0 ? listPollsNew.map((poll) => (
-                                <PollCard key={poll.id} poll={poll} />
+                            listPollsNew.length > 0 ? listPollsNew.map((poll, index) => (
+                                <PollCard key={index} poll={poll} />
                             )) : noData
                         }
                     </Row>
@@ -37,8 +37,8 @@ function Home() {
                 <Card.Body>
                     <Row>
                         {
-                            listPollsDone.length > 0 ? listPollsDone.map((poll) => (
-                                <PollCard key={poll.id} poll={poll} />
+                            listPollsDone.length > 0 ? listPollsDone.map((poll, index) => (
+                                <PollCard key={index} poll={poll} />
                             )) : noData
                         }
                     </Row>
