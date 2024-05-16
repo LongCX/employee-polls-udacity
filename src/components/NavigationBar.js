@@ -2,11 +2,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
 import { logout } from '../actions';
 
 const NavigationBar = () => {
   const infoAuth = useSelector((state) => state.authUser);
+  const listUsers = useSelector((state) => state.users.listUsers);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -26,14 +28,16 @@ const NavigationBar = () => {
           infoAuth.isLoggedIn ?
             (
               <Nav>
-                <Navbar.Text>{infoAuth.username},</Navbar.Text>
+                <Navbar.Text><Image style={{ width: '2rem' }} src={listUsers[infoAuth.username].avatarURL} roundedCircle /> {infoAuth.username},</Navbar.Text>
                 <Nav.Link as={NavLink} to="/" onClick={handleLogout}>Logout</Nav.Link>
               </Nav>
             ) :
             (
               <Nav>
                 <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
+                <Nav.Link as={NavLink} to="/register">Register</Nav.Link>
               </Nav>
+              
             )
         }
       </Container>

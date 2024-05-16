@@ -1,6 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 
 export const loginSuccess = createAction('LOGIN_SUCCESS')
+export const register = createAction('REGISTER')
 export const logout = createAction('LOGOUT')
 export const setListUsers = createAction('LIST_USERS')
 export const setListQuestions = createAction('LIST_QUESTIONS')

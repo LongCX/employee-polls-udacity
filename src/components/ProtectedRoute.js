@@ -11,7 +11,7 @@ function ProtectedRoute() {
                 <Card.Header>Unauthorized </Card.Header>
                 <Card.Body>
                     <Card.Text>
-                        Need <Link to="/login">login</Link> to see content
+                        Need <Link to="/login">Login</Link> or <Link to="/register">Register</Link> to see content
                     </Card.Text>
                 </Card.Body>
             </Card>

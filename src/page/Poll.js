@@ -66,8 +66,8 @@ function Poll() {
             <Row className="mx-auto text-center" style={{ width: '70rem' }}>
                 <Col><h1>Poll by {infoPoll.author}</h1></Col>
             </Row>
-            <Row className="mx-auto" style={{ width: '70rem' }}>
-                <Col className="mt-3 mb-3"><Image src="" roundedCircle /></Col>
+            <Row className="mx-auto text-center" style={{ width: '70rem' }}>
+                <Col className="mt-3 mb-3"><Image style={{ width: '10rem' }} src={listUsers[infoPoll.author].avatarURL} roundedCircle /></Col>
             </Row>
             <Card className="mx-auto" style={{ width: '70rem' }}>
                 <Card.Header as="h5">Would You Rather</Card.Header>

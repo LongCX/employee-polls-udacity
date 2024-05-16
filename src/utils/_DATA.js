@@ -1,9 +1,9 @@
 let users = {
   sarahedo: {
     id: 'sarahedo',
-    password:'password123',
+    password:'$2a$10$HNCOnvvGAUpYqNLdcJOVpOtvLhQ1Kut5yST71OMI8ViSyK1p5UOiC',
     name: 'Sarah Edo',
-    avatarURL: null,
+    avatarURL: '/assets/images/avatar/Avatar_1.jpg',
     answers: {
       "8xf0y6ziyjabvozdd253nd": 'optionOne',
       "6ni6ok3ym7mf1p33lnez": 'optionOne',
@@ -14,9 +14,9 @@ let users = {
   },
   tylermcginnis: {
     id: 'tylermcginnis',
-    password:'abc321',
+    password:'$2a$10$5WrWgQ9HE8At.KOkU.vHPeXKeV2fM/zqZrv..qDpA0dVnVTjOBekq',
     name: 'Tyler McGinnis',
-    avatarURL: null,
+    avatarURL: '/assets/images/avatar/Avatar_2.jpg',
     answers: {
       "vthrdm985a262al8qx3do": 'optionOne',
       "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -25,9 +25,9 @@ let users = {
   },
   mtsamis: {
     id: 'mtsamis',
-    password:'xyz123',
+    password:'$2a$10$VzupTlHF2LdK7whBnC5CCeRE4FoGvG82fa1qf2MZ2ybl1Tq6711xS',
     name: 'Mike Tsamis',
-    avatarURL: null,
+    avatarURL: '/assets/images/avatar/Avatar_3.jpg',
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',
@@ -37,9 +37,9 @@ let users = {
   },
   zoshikanlu: {
     id: 'zoshikanlu',
-    password:'pass246',
+    password:'$2a$10$/y.J.5pzUiuf1y0hJM1jvuvMgGmyhYR0iIXgnfdcCQbotzlw3Ex5S',
     name: 'Zenobia Oshikanlu',
-    avatarURL: null,
+    avatarURL: '/assets/images/avatar/Avatar_4.jpg',
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
     },

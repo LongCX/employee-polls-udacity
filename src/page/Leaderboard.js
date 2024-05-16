@@ -1,6 +1,8 @@
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
+import Image from 'react-bootstrap/Image';
+import Badge from 'react-bootstrap/Badge';
 import { useSelector } from 'react-redux';
 
 function Leaderboard() {
@@ -22,16 +24,16 @@ function Leaderboard() {
                     <thead>
                         <tr>
                             <th>Users</th>
-                            <th>Answers</th>
-                            <th>Created</th>
+                            <th className="text-center">Answers</th>
+                            <th className="text-center">Created</th>
                         </tr>
                     </thead>
                     <tbody>
                         {dataLeaderBoard.map((data, index) => (
                             <tr key={index}>
-                                <td>{data.user}</td>
-                                <td>{data.answerCount}</td>
-                                <td>{data.questionCount}</td>
+                                <td><Image style={{ width: '3rem' }} src={listUsers[data.user].avatarURL} roundedCircle /> {listUsers[data.user].name} <Badge bg="secondary">{data.user}</Badge></td>
+                                <td className="text-center">{data.answerCount}</td>
+                                <td className="text-center">{data.questionCount}</td>
                             </tr>
                         ))}
                     </tbody>
