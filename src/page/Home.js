@@ -6,24 +6,20 @@ import PollCard from '../components/PollCard';
 
 function Home() {
     const noData = <span>Not data to display</span>;
-    // Get list answer polls of user
+
     const infoAuth = useSelector((state) => state.authUser);
-    const answerOfUser = (useSelector((state) => state.users.listUsers))[infoAuth.username];
-    const arrAnswerOfUser = Object.entries(answerOfUser.answers).map(([ida]) => ({ ida }));
+    const answerOfUser = (useSelector((state) => state.users.listUsers))[infoAuth.username].answers;
+    const arrIdAnswerOfUser =  Object.keys(answerOfUser);
 
-    // Get list polls with sort data newest
-    const pollCreated = Object.values(useSelector((state) => state.polls.pollCreated));
-    const listQuestions = Object.values(useSelector((state) => state.polls.listQuestions));
-    const combinePollsSortNewst = listQuestions.concat(pollCreated).sort((a, b) => b.timestamp - a.timestamp);
+    const listPollsSortNewst = Object.values(useSelector((state) => state.polls.listPolls)).sort((a, b) => b.timestamp - a.timestamp);
 
-    // List polls to render
-    const listPollsNew = combinePollsSortNewst.filter((poll) => !poll.id.includes(arrAnswerOfUser.ida));
-    const listPollsDone = combinePollsSortNewst.filter((poll) => poll.id.includes(arrAnswerOfUser.ida));
+    const listPollsNew = listPollsSortNewst.filter((poll) => !arrIdAnswerOfUser.includes(poll.id));
+    const listPollsDone = listPollsSortNewst.filter((poll) => arrIdAnswerOfUser.includes(poll.id));
 
     return (
         <Container className="mt-5">
             <Card className="mx-auto" style={{ width: '60rem' }}>
-                <Card.Header as="h5">New questions</Card.Header>
+                <Card.Header as="h5">New Polls</Card.Header>
                 <Card.Body>
                     <Row>
                         {
