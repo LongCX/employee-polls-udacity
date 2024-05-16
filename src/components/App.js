@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes, Navigate } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
-import { setListUsers, setListQuestions, startLoading, stopLoading } from '../actions';
+import { setListUsers, setListQuestions, startLoading, stopLoading, startLoadOnceInitData } from '../actions';
 import Login from "../page/Login";
 import NavigationBar from './NavigationBar';
 import Home from "../page/Home";
@@ -18,21 +18,24 @@ function App() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const isLoading = useSelector((state) => state.loading.isLoading);
+  const isLoad = useSelector((state) => state.loading.isLoadOnceInitData);
 
   useEffect(() => {
-    dispatch(startLoading());
-
-    getInitData().then(({ users, questions }) => {
-      dispatch(setListUsers(users));
-      dispatch(setListQuestions(questions));
-
-      dispatch(stopLoading());
-    })
-  }, [dispatch])
+    // Keep load data will once time (combine with redux-persist)
+    if (!isLoad) {
+      dispatch(startLoading());
+      getInitData().then(({ users, questions }) => {
+        dispatch(setListUsers(users));
+        dispatch(setListQuestions(questions));
+        dispatch(stopLoading());
+        dispatch(startLoadOnceInitData());
+      })
+    }
+  }, [dispatch, isLoad])
 
   return (
     <div className="App">
-      {isLoading && (<Container fluid='true' className="overlay"><Spinner animation="border" variant="light" /></Container>)}
+      {(isLoading && !isLoad) && (<Container fluid='true' className="overlay"><Spinner animation="border" variant="light" /></Container>)}
       <Fragment>
         <NavigationBar />
         <Routes>

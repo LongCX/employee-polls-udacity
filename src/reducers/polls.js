@@ -15,8 +15,12 @@ const polls = createReducer(initialState, (builder) => {
     })
     .addCase(setListQuestions.type, (state, action) => { state.listPolls = action.payload })
     .addCase(answerVotePoll.type, (state, action) => {
-        // Prevent change vote of user if user voted
-        (state.listPolls[action.payload.qid][action.payload.answer].votes).filter(u => action.payload.user !== u).map(u => u.push(action.payload.user))
+      const user = action.payload.user;
+      const qid = action.payload.qid;
+      // Prevent change vote of user if user voted
+      if (!(state.listPolls[qid]["optionOne"].votes[user]) && !(state.listPolls[qid]["optionTwo"].votes[user])) {
+        state.listPolls[qid][action.payload.answer].votes.push(user)
+      }
     })
 })
 

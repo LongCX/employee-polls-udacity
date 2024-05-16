@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
 import Spinner from 'react-bootstrap/Spinner';
-import { createPoll, startLoading, stopLoading } from '../actions';
+import { createPoll, updatePollOfUser, startLoading, stopLoading } from '../actions';
 import { _saveQuestion } from '../utils/_DATA';
 
 function PollCreation() {
@@ -46,6 +46,7 @@ function PollCreation() {
 
         _saveQuestion(question).then((question) => {
             dispatch(createPoll(question));
+            dispatch(updatePollOfUser(question));
 
             dispatch(stopLoading());
 
