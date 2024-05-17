@@ -13,7 +13,7 @@ import { answerVotePoll, answerVoteOfUser } from '../actions';
 import NotFound from './NotFound';
 //import { _saveQuestionAnswer } from '../utils/_DATA'
 
-function Poll() {
+const Poll = () => {
     const [isVoted, setIsVoted] = useState(false);
     const dispatch = useDispatch();
     const { questionId } = useParams();
@@ -43,17 +43,15 @@ function Poll() {
         const optionAnswer = e.target.value
 
         // Comment because error occurred when call API with message: Uncaught TypeError: Cannot read properties of undefined (reading 'answers') at _DATA.js:193:1
-        // I think cause is: redux app can't write data to file js so data not mapping
+        // I think this method not compatible with my app
         /* _saveQuestionAnswer({ username, questionId, optionAnswer })
             .then(() => {
                 dispatch(answerVoteOfUser({ user: username, qid: questionId, answer: optionAnswer }));
                 dispatch(answerVotePoll({ user: username, qid: questionId, answer: optionAnswer }));
                 setIsVoted(true);
-                dispatch(stopLoading());
             })
             .catch((e) => {
                 console.log("Error in handle toggle: ", e);
-                dispatch(stopLoading());
             }) */
 
         dispatch(answerVoteOfUser({ user: username, qid: questionId, answer: optionAnswer }));

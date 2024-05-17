@@ -5,9 +5,9 @@ import Image from 'react-bootstrap/Image';
 import Badge from 'react-bootstrap/Badge';
 import { useSelector } from 'react-redux';
 
-function Leaderboard() {
+const Leaderboard = () => {
     const listUsers = useSelector((state) => state.users.listUsers);
-    let dataLeaderBoard = Object.entries(listUsers).map(([user, value]) => {
+    const dataLeaderBoardSort = Object.entries(listUsers).map(([user, value]) => {
         let answerCount = Object.keys(value.answers).length;
         let questionCount = value.questions.length;
         return {
@@ -15,6 +15,9 @@ function Leaderboard() {
             answerCount,
             questionCount
         };
+
+    }).sort(function (a, b) {
+        return b.answerCount - a.answerCount || b.questionCount - a.questionCount || b.user.localeCompare(a.user)
     });
 
     return (
@@ -29,7 +32,7 @@ function Leaderboard() {
                         </tr>
                     </thead>
                     <tbody>
-                        {dataLeaderBoard.map((data, index) => (
+                        {dataLeaderBoardSort.map((data, index) => (
                             <tr key={index}>
                                 <td><Image style={{ width: '3rem' }} src={listUsers[data.user].avatarURL} roundedCircle /> {listUsers[data.user].name} <Badge bg="secondary">{data.user}</Badge></td>
                                 <td className="text-center">{data.answerCount}</td>

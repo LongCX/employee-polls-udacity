@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import PollCard from '../components/PollCard';
 
-function Home() {
+const Home = () => {
     const noData = <span>Not data to display</span>;
 
     const infoAuth = useSelector((state) => state.authUser);

@@ -2,9 +2,9 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
-import formatDate from '../utils/helpers';
+import { formatDate } from '../utils/helpers';
 
-function PollCard({ poll }) {
+const PollCard = ({ poll }) => {
 
     return (
         <Col className="text-center" xs={3}>

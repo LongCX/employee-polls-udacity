@@ -12,25 +12,14 @@ import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
 import bcrypt from 'bcryptjs';
 
-function Register() {
+const Register = () => {
     const [username, setUsername] = useState('');
     const [fullname, setFullname] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const listUsers = useSelector((state) => state.users.listUsers);
-
-    const handleUsernameChange = (e) => {
-        setUsername(e.target.value);
-    };
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-    };
-    const handleFullnameChange = (e) => {
-        setFullname(e.target.value);
-    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!username || !password || !fullname) {
@@ -69,15 +58,15 @@ function Register() {
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="username">
                             <Form.Label>User:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter username" value={username} onChange={handleUsernameChange} />
+                            <Form.Control type="text" placeholder="Enter username" value={username} onChange={(e) => setUsername(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="fullname">
                             <Form.Label>Full name:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter full name" value={fullname} onChange={handleFullnameChange} />
+                            <Form.Control type="text" placeholder="Enter full name" value={fullname} onChange={(e) => setFullname(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="password">
                             <Form.Label>Password:</Form.Label>
-                            <Form.Control type="password" placeholder="Enter password" value={password} onChange={handlePasswordChange} />
+                            <Form.Control type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </Form.Group>
                         <Row className="text-center">
                             <Col>

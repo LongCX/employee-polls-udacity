@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import Card from 'react-bootstrap/Card';
 import { Link, Outlet } from 'react-router-dom'
 
-function ProtectedRoute() {
+const ProtectedRoute = () => {
     const infoAuth = useSelector((state) => state.authUser);
 
     if (!infoAuth.isLoggedIn) {

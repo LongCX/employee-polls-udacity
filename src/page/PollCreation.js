@@ -13,7 +13,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import { createPoll, updatePollOfUser, startLoading, stopLoading } from '../actions';
 import { _saveQuestion } from '../utils/_DATA';
 
-function PollCreation() {
+const PollCreation = () => {
     const [optionOne, setoptionOne] = useState('');
     const [optionTwo, setoptionTwo] = useState('');
     const [error, setError] = useState('');
@@ -23,33 +23,22 @@ function PollCreation() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleOptionOneChange = (e) => {
-        setoptionOne(e.target.value);
-    };
-    const handleOptionTwoChange = (e) => {
-        setoptionTwo(e.target.value);
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!optionOne || !optionTwo) {
             setError(`Option can't empty`);
             return;
         }
-
         const question = {
             optionOneText: optionOne,
             optionTwoText: optionTwo,
             author: infoAuth.username,
         }
         dispatch(startLoading());
-
         _saveQuestion(question).then((question) => {
             dispatch(createPoll(question));
             dispatch(updatePollOfUser(question));
-
             dispatch(stopLoading());
-
             setError('');
             navigate("/");
         })
@@ -70,11 +59,11 @@ function PollCreation() {
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="optionOne">
                             <Form.Label>First Option:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter option one" value={optionOne} onChange={handleOptionOneChange} />
+                            <Form.Control type="text" placeholder="Enter option one" value={optionOne} onChange={(e) => setoptionOne(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="optionTwo">
                             <Form.Label>Second Option:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter option two" value={optionTwo} onChange={handleOptionTwoChange} />
+                            <Form.Control type="text" placeholder="Enter option two" value={optionTwo} onChange={(e) => setoptionTwo(e.target.value)} />
                         </Form.Group>
                         <Row className="text-center">
                             <Col>
