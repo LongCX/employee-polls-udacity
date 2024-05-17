@@ -9,23 +9,27 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
 import Badge from 'react-bootstrap/Badge';
-import { answerVotePoll, answerVoteOfUser } from '../actions';
+import Spinner from 'react-bootstrap/Spinner';
+import { answerVotePoll, answerVoteOfUser, startLoading, stopLoading } from '../actions';
 import NotFound from './NotFound';
-//import { _saveQuestionAnswer } from '../utils/_DATA'
+import { _saveQuestionAnswer, _saveQuestionAnswerForNewRegistUser } from '../utils/_DATA'
+import { initUser } from '../utils/helpers';
 
 const Poll = () => {
-    const [isVoted, setIsVoted] = useState(false);
+    const [option, setOption] = useState('');
     const dispatch = useDispatch();
     const { questionId } = useParams();
 
     const username = useSelector((state) => state.authUser.username);
     const listPolls = useSelector((state) => state.questions.questions);
     const listUsers = useSelector((state) => state.users.users);
+    const isLoading = useSelector((state) => state.loading.isLoading);
     const infoPoll = listPolls[questionId];
-
     if (typeof infoPoll === "undefined") {
         return <NotFound />
     }
+
+    const btnLoading = <Button variant="primary" disabled><Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />Loading...</Button>
 
     const isVoteOptionOne = (infoPoll.optionOne.votes).includes(username);
     const isVoteOptionTwo = (infoPoll.optionTwo.votes).includes(username);
@@ -39,24 +43,31 @@ const Poll = () => {
     const arrListUserVoted = (infoPoll.optionOne.votes).concat(infoPoll.optionTwo.votes).join(', ');
     const percentVoteOfPoll = (totalVoteOfPoll / totalUsers) * 100;
 
-    const handleVote = (e) => {
-        const optionAnswer = e.target.value
+    const handleVote = (option) => {
+        dispatch(startLoading());
+        setOption(option);
 
-        // Comment because error occurred when call API with message: Uncaught TypeError: Cannot read properties of undefined (reading 'answers') at _DATA.js:193:1
-        // I think this method API not compatible with my app
-        /* _saveQuestionAnswer({ username, questionId, optionAnswer })
-            .then(() => {
-                dispatch(answerVoteOfUser({ user: username, qid: questionId, answer: optionAnswer }));
-                dispatch(answerVotePoll({ user: username, qid: questionId, answer: optionAnswer }));
-                setIsVoted(true);
-            })
-            .catch((e) => {
-                console.log("Error in handle toggle: ", e);
-            }) */
-
-        dispatch(answerVoteOfUser({ user: username, qid: questionId, answer: optionAnswer }));
-        dispatch(answerVotePoll({ user: username, qid: questionId, answer: optionAnswer }));
-        setIsVoted(true);
+        if (username.includes(initUser)) {
+            _saveQuestionAnswer({ authedUser: username, qid: questionId, answer: option })
+                .then(() => {
+                    dispatch(answerVoteOfUser({ user: username, qid: questionId, answer: option }));
+                    dispatch(answerVotePoll({ user: username, qid: questionId, answer: option }));
+                    dispatch(stopLoading());
+                })
+                .catch((e) => {
+                    console.log("Error in handle toggle: ", e);
+                })
+        } else { // Handle for function regist new user not have in _DATA.js
+            _saveQuestionAnswerForNewRegistUser({ authedUser: username, qid: questionId, answer: option })
+                .then(() => {
+                    dispatch(answerVoteOfUser({ user: username, qid: questionId, answer: option }));
+                    dispatch(answerVotePoll({ user: username, qid: questionId, answer: option }));
+                    dispatch(stopLoading());
+                })
+                .catch((e) => {
+                    console.log("Error in handle toggle: ", e);
+                })
+        }
     };
 
     return (
@@ -70,7 +81,7 @@ const Poll = () => {
             <Card className="mx-auto" style={{ width: '70rem' }}>
                 <Card.Header as="h5">Would You Rather</Card.Header>
                 <Card.Body>
-                    {(isVoted || isVoteOptionOne || isVoteOptionTwo) && <Alert key="warning" variant="warning">You was vote for this poll. Can't change your result vote !</Alert>}
+                    {(isVoteOptionOne || isVoteOptionTwo) && <Alert key="warning" variant="warning">You was vote for this poll. Can't change your result vote !</Alert>}
                     <Row>
                         <Col>
                             <Card>
@@ -78,8 +89,8 @@ const Poll = () => {
                                     <Card.Title as="h5">Option one to vote</Card.Title>
                                     <Card.Text>{voteOneOfPoll} {(isVoteOptionOne) && <Badge bg="success">your vote</Badge>}</Card.Text>
                                     {
-                                        (isVoted || isVoteOptionOne || isVoteOptionTwo) ? <Button variant="primary" disabled>Vote</Button> :
-                                            <Button variant="primary" value="optionOne" onClick={handleVote} >Vote</Button>
+                                        (isVoteOptionOne || isVoteOptionTwo) ? <Button variant="primary" disabled>Vote</Button> :
+                                            (isLoading && option === 'optionOne' ? btnLoading : <Button variant="primary" value="optionOne" onClick={(e) => handleVote(e.target.value)} >Vote</Button>)
                                     }
                                 </Card.Body>
                             </Card>
@@ -90,25 +101,25 @@ const Poll = () => {
                                     <Card.Title as="h5">Option two to vote</Card.Title>
                                     <Card.Text>{voteTwoOfPoll} {(isVoteOptionTwo) && <Badge bg="success">your vote</Badge>}</Card.Text>
                                     {
-                                        (isVoted || isVoteOptionOne || isVoteOptionTwo) ? <Button variant="primary" disabled>Vote</Button> :
-                                            <Button variant="primary" value="optionTwo" onClick={handleVote} >Vote</Button>
+                                        (isVoteOptionOne || isVoteOptionTwo) ? <Button variant="primary" disabled>Vote</Button> :
+                                            (isLoading && option === 'optionTwo' ? btnLoading : <Button variant="primary" value="optionTwo" onClick={(e) => handleVote(e.target.value)} >Vote</Button>)
                                     }
                                 </Card.Body>
                             </Card>
                         </Col>
                     </Row>
-                    { (isVoted || isVoteOptionOne || isVoteOptionTwo) && (
-                    <Row>
-                        <Col>
-                            <Card className="mt-3" border="info">
-                                <Card.Body>
-                                    <Card.Title as="h5">Statistics for this vote</Card.Title>
-                                    <Card.Text>Number of people who vote: <Badge bg="secondary">{totalVoteOfPoll}</Badge> {arrListUserVoted && (<span>({arrListUserVoted})</span>)}</Card.Text>
-                                    <Card.Text>Percentage of people who vote: <Badge bg="secondary">{percentVoteOfPoll.toFixed(2)}%</Badge> </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>)}
+                    {(isVoteOptionOne || isVoteOptionTwo) && (
+                        <Row>
+                            <Col>
+                                <Card className="mt-3" border="info">
+                                    <Card.Body>
+                                        <Card.Title as="h5">Statistics for this vote</Card.Title>
+                                        <Card.Text>Number of people who vote: <Badge bg="secondary">{totalVoteOfPoll}</Badge> {arrListUserVoted && (<span>({arrListUserVoted})</span>)}</Card.Text>
+                                        <Card.Text>Percentage of people who vote: <Badge bg="secondary">{percentVoteOfPoll.toFixed(2)}%</Badge> </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        </Row>)}
                 </Card.Body>
             </Card>
 

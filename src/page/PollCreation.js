@@ -29,19 +29,18 @@ const PollCreation = () => {
             setError(`Option can't empty`);
             return;
         }
-        const question = {
-            optionOneText: optionOne,
-            optionTwoText: optionTwo,
-            author: infoAuth.username,
-        }
         dispatch(startLoading());
-        _saveQuestion(question).then((question) => {
-            dispatch(createPoll(question));
-            dispatch(updatePollOfUser(question));
-            dispatch(stopLoading());
-            setError('');
-            navigate("/");
-        })
+        _saveQuestion({ optionOneText: optionOne, optionTwoText: optionTwo, author: infoAuth.username, })
+            .then((question) => {
+                dispatch(createPoll(question));
+                dispatch(updatePollOfUser(question));
+                dispatch(stopLoading());
+                setError('');
+                navigate("/");
+            })
+            .catch((e) => {
+                console.log("Error in handle create: ", e);
+            })
     };
 
     return (

@@ -22,3 +22,5 @@ export const getRandomAvatarPathUrl = () => {
   ];
   return avatars[Math.floor(Math.random() * avatars.length)];
 }
+
+export const initUser = ['sarahedo', 'tylermcginnis', 'mtsamis', 'zoshikanlu'];

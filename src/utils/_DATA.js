@@ -208,7 +208,7 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
       }
 
       resolve(true)
-    }, 500)
+    }, 1000)
   })
 }
 
@@ -220,3 +220,16 @@ export const getInitData = () => {
     })
   );
 };
+
+export function _saveQuestionAnswerForNewRegistUser ({ authedUser, qid, answer }) {
+  return new Promise((resolve, reject) => {
+    if (!authedUser || !qid || !answer) {
+      reject("Please provide authedUser, qid, and answer");
+    }
+
+    setTimeout(() => {
+      // emulate calling API
+      resolve(true)
+    }, 1000)
+  })
+}
