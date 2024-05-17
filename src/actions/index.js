@@ -3,7 +3,7 @@ import { createAction } from '@reduxjs/toolkit';
 export const loginSuccess = createAction('LOGIN_SUCCESS')
 export const register = createAction('REGISTER')
 export const logout = createAction('LOGOUT')
-export const setListUsers = createAction('LIST_USERS')
+export const setUsers = createAction('LIST_USERS')
 export const setListQuestions = createAction('LIST_QUESTIONS')
 export const createPoll = createAction('CREATE_POLL')
 export const updatePollOfUser = createAction('UPDATE_POLL_OF_USER')

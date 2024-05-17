@@ -8,7 +8,7 @@ import { logout } from '../actions';
 
 const NavigationBar = () => {
   const infoAuth = useSelector((state) => state.authUser);
-  const listUsers = useSelector((state) => state.users.listUsers);
+  const listUsers = useSelector((state) => state.users.users);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -22,7 +22,7 @@ const NavigationBar = () => {
         <Nav fill variant="underline" defaultActiveKey="/" className="me-auto">
           <Nav.Link as={NavLink} to="/">Home</Nav.Link>
           <Nav.Link as={NavLink} to="/leaderboard">Leaderboard</Nav.Link>
-          <Nav.Link as={NavLink} to="/new">New Poll</Nav.Link>
+          <Nav.Link as={NavLink} to="/add">New Poll</Nav.Link>
         </Nav>
         {
           infoAuth.isLoggedIn ?

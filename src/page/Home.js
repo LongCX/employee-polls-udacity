@@ -8,10 +8,10 @@ const Home = () => {
     const noData = <span>Not data to display</span>;
 
     const infoAuth = useSelector((state) => state.authUser);
-    const answerOfUser = (useSelector((state) => state.users.listUsers))[infoAuth.username].answers;
+    const answerOfUser = (useSelector((state) => state.users.users))[infoAuth.username].answers;
     const arrIdAnswerOfUser =  Object.keys(answerOfUser);
 
-    const listPollsSortNewst = Object.values(useSelector((state) => state.polls.listPolls)).sort((a, b) => b.timestamp - a.timestamp);
+    const listPollsSortNewst = Object.values(useSelector((state) => state.questions.questions)).sort((a, b) => b.timestamp - a.timestamp);
 
     const listPollsNew = listPollsSortNewst.filter((poll) => !arrIdAnswerOfUser.includes(poll.id));
     const listPollsDone = listPollsSortNewst.filter((poll) => arrIdAnswerOfUser.includes(poll.id));

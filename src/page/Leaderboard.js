@@ -6,7 +6,7 @@ import Badge from 'react-bootstrap/Badge';
 import { useSelector } from 'react-redux';
 
 const Leaderboard = () => {
-    const listUsers = useSelector((state) => state.users.listUsers);
+    const listUsers = useSelector((state) => state.users.users);
     const dataLeaderBoardSort = Object.entries(listUsers).map(([user, value]) => {
         let answerCount = Object.keys(value.answers).length;
         let questionCount = value.questions.length;

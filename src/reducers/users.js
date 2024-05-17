@@ -1,27 +1,27 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setListUsers, answerVoteOfUser, updatePollOfUser, register } from '../actions'
+import { setUsers, answerVoteOfUser, updatePollOfUser, register } from '../actions'
 import { getRandomAvatarPathUrl } from '../utils/helpers'
 
 const initialState = {
-  listUsers: {},
+  users: {},
 };
 
 const users = createReducer(initialState, (builder) => {
   builder
-    .addCase(setListUsers.type, (state, action) => { state.listUsers = action.payload })
+    .addCase(setUsers.type, (state, action) => { state.users = action.payload })
     .addCase(answerVoteOfUser.type, (state, action) => {
       const user = action.payload.user;
       const qid = action.payload.qid;
       // Prevent change vote of user if user voted
-      if (!(state.listUsers[user].answers[qid])) {
+      if (!(state.users[user].answers[qid])) {
         const voteNew = {
           [qid]: action.payload.answer
         }
-        state.listUsers[user].answers = Object.assign({}, state.listUsers[user].answers, voteNew)
+        state.users[user].answers = Object.assign({}, state.users[user].answers, voteNew)
       }
     })
     .addCase(updatePollOfUser.type, (state, action) => {
-      state.listUsers[action.payload.author].questions.push(action.payload.id)
+      state.users[action.payload.author].questions.push(action.payload.id)
     })
     .addCase(register.type, (state, action) => {
       const newUser = {
@@ -34,7 +34,7 @@ const users = createReducer(initialState, (builder) => {
           questions: [],
         }
       }
-      state.listUsers = Object.assign({}, state.listUsers, newUser)
+      state.users = Object.assign({}, state.users, newUser)
     })
 })
 

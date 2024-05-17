@@ -19,8 +19,8 @@ const Poll = () => {
     const { questionId } = useParams();
 
     const username = useSelector((state) => state.authUser.username);
-    const listPolls = useSelector((state) => state.polls.listPolls);
-    const listUsers = useSelector((state) => state.users.listUsers);
+    const listPolls = useSelector((state) => state.questions.questions);
+    const listUsers = useSelector((state) => state.users.users);
     const infoPoll = listPolls[questionId];
 
     if (typeof infoPoll === "undefined") {
@@ -43,7 +43,7 @@ const Poll = () => {
         const optionAnswer = e.target.value
 
         // Comment because error occurred when call API with message: Uncaught TypeError: Cannot read properties of undefined (reading 'answers') at _DATA.js:193:1
-        // I think this method not compatible with my app
+        // I think this method API not compatible with my app
         /* _saveQuestionAnswer({ username, questionId, optionAnswer })
             .then(() => {
                 dispatch(answerVoteOfUser({ user: username, qid: questionId, answer: optionAnswer }));
@@ -97,17 +97,18 @@ const Poll = () => {
                             </Card>
                         </Col>
                     </Row>
+                    { (isVoted || isVoteOptionOne || isVoteOptionTwo) && (
                     <Row>
                         <Col>
                             <Card className="mt-3" border="info">
                                 <Card.Body>
                                     <Card.Title as="h5">Statistics for this vote</Card.Title>
                                     <Card.Text>Number of people who vote: <Badge bg="secondary">{totalVoteOfPoll}</Badge> {arrListUserVoted && (<span>({arrListUserVoted})</span>)}</Card.Text>
-                                    <Card.Text>Percentage of people who vote: <Badge bg="secondary">{percentVoteOfPoll}%</Badge> </Card.Text>
+                                    <Card.Text>Percentage of people who vote: <Badge bg="secondary">{percentVoteOfPoll.toFixed(2)}%</Badge> </Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
-                    </Row>
+                    </Row>)}
                 </Card.Body>
             </Card>
 

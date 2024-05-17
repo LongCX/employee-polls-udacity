@@ -2,26 +2,26 @@ import { createReducer } from '@reduxjs/toolkit';
 import { createPoll, answerVotePoll, setListQuestions } from '../actions';
 
 const initialState = {
-  listPolls: {},
+  questions: {},
 };
 
-const polls = createReducer(initialState, (builder) => {
+const questions = createReducer(initialState, (builder) => {
   builder
     .addCase(createPoll.type, (state, action) => {
       const pollNew = {
         [action.payload.id]: action.payload
       }
-      state.listPolls = Object.assign({}, state.listPolls, pollNew)
+      state.questions = Object.assign({}, state.questions, pollNew)
     })
-    .addCase(setListQuestions.type, (state, action) => { state.listPolls = action.payload })
+    .addCase(setListQuestions.type, (state, action) => { state.questions = action.payload })
     .addCase(answerVotePoll.type, (state, action) => {
       const user = action.payload.user;
       const qid = action.payload.qid;
       // Prevent change vote of user if user voted
-      if (!(state.listPolls[qid]["optionOne"].votes[user]) && !(state.listPolls[qid]["optionTwo"].votes[user])) {
-        state.listPolls[qid][action.payload.answer].votes.push(user)
+      if (!(state.questions[qid]["optionOne"].votes[user]) && !(state.questions[qid]["optionTwo"].votes[user])) {
+        state.questions[qid][action.payload.answer].votes.push(user)
       }
     })
 })
 
-export default polls;
+export default questions;
