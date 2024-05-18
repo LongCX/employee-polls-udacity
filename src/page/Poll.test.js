@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from "@reduxjs/toolkit"
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import rootReducer from '../reducers';
 import Poll from './Poll';
 import { setUsers, setListQuestions, loginSuccess } from '../actions';
