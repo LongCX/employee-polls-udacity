@@ -52,19 +52,19 @@ const Login = () => {
             <Card className="mx-auto" style={{ width: '40rem' }}>
                 <Card.Header as="h5">Log in</Card.Header>
                 <Card.Body>
-                    {error && <Alert key="danger" variant="danger">{error}</Alert>}
+                    {error && <Alert data-testid="error" key="danger" variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="username">
                             <Form.Label>User:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                            <Form.Control data-testid="username" type="text" placeholder="Enter username" value={username} onChange={(e) => setUsername(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="password">
                             <Form.Label>Password:</Form.Label>
-                            <Form.Control type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <Form.Control data-testid="password" type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </Form.Group>
                         <Row className="text-center">
                             <Col>
-                                <Button variant="primary" type="submit">Login</Button>
+                                <Button data-testid="button-submit" variant="primary" type="submit">Login</Button>
                             </Col>
                         </Row>
                     </Form>

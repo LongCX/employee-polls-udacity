@@ -115,7 +115,7 @@ const Poll = () => {
                                     <Card.Body>
                                         <Card.Title as="h5">Statistics for this vote</Card.Title>
                                         <Card.Text>Number of people who vote: <Badge bg="secondary">{totalVoteOfPoll}</Badge> {arrListUserVoted && (<span>({arrListUserVoted})</span>)}</Card.Text>
-                                        <Card.Text>Percentage of people who vote: <Badge bg="secondary">{percentVoteOfPoll.toFixed(2)}%</Badge> </Card.Text>
+                                        <Card.Text>Percentage of people who vote: <Badge data-testid="percent" bg="secondary">{percentVoteOfPoll.toFixed(2)}%</Badge> </Card.Text>
                                     </Card.Body>
                                 </Card>
                             </Col>

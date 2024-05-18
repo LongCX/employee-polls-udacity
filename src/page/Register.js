@@ -32,12 +32,7 @@ const Register = () => {
         }
         const salt = await bcrypt.genSalt(10);
         const hashPwd = await bcrypt.hash(password, salt);
-        const newUser = {
-            username: username,
-            fullname: fullname,
-            password: hashPwd,
-        }
-        dispatch(register(newUser));
+        dispatch(register({username: username, fullname: fullname, password: hashPwd}));
         dispatch(loginSuccess(username));
         setError('');
         navigate("/");
@@ -54,23 +49,23 @@ const Register = () => {
             <Card className="mx-auto" style={{ width: '40rem' }}>
                 <Card.Header as="h5">Register</Card.Header>
                 <Card.Body>
-                    {error && <Alert key="danger" variant="danger">{error}</Alert>}
+                    {error && <Alert data-testid="error" key="danger" variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="username">
                             <Form.Label>User:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                            <Form.Control data-testid="username" type="text" placeholder="Enter username" value={username} onChange={(e) => setUsername(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="fullname">
                             <Form.Label>Full name:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter full name" value={fullname} onChange={(e) => setFullname(e.target.value)} />
+                            <Form.Control data-testid="fullname" type="text" placeholder="Enter full name" value={fullname} onChange={(e) => setFullname(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="password">
                             <Form.Label>Password:</Form.Label>
-                            <Form.Control type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <Form.Control data-testid="password" type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </Form.Group>
                         <Row className="text-center">
                             <Col>
-                                <Button variant="primary" type="submit">Register</Button>
+                                <Button data-testid="button-submit" variant="primary" type="submit">Register</Button>
                             </Col>
                         </Row>
                     </Form>

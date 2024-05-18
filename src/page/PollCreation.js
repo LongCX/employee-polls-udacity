@@ -54,22 +54,22 @@ const PollCreation = () => {
             <Card className="mx-auto" style={{ width: '40rem' }}>
                 <Card.Header as="h5">Create Your Own Poll</Card.Header>
                 <Card.Body>
-                    {error && <Alert key="danger" variant="danger">{error}</Alert>}
+                    {error && <Alert data-testid="error" key="danger" variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="optionOne">
                             <Form.Label>First Option:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter option one" value={optionOne} onChange={(e) => setoptionOne(e.target.value)} />
+                            <Form.Control data-testid="optionOne" type="text" placeholder="Enter option one" value={optionOne} onChange={(e) => setoptionOne(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="optionTwo">
                             <Form.Label>Second Option:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter option two" value={optionTwo} onChange={(e) => setoptionTwo(e.target.value)} />
+                            <Form.Control data-testid="optionTwo" type="text" placeholder="Enter option two" value={optionTwo} onChange={(e) => setoptionTwo(e.target.value)} />
                         </Form.Group>
                         <Row className="text-center">
                             <Col>
                                 {
                                     isLoading ?
                                         (<Button variant="primary" disabled><Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />Loading...</Button>) :
-                                        (<Button variant="primary" type="submit">Create</Button>)
+                                        (<Button data-testid="button-submit" variant="primary" type="submit">Create</Button>)
                                 }
 
                             </Col>

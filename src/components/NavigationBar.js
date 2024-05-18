@@ -20,9 +20,9 @@ const NavigationBar = () => {
       <Container>
         <Navbar.Brand>Udacity Polls</Navbar.Brand>
         <Nav fill variant="underline" defaultActiveKey="/" className="me-auto">
-          <Nav.Link as={NavLink} to="/">Home</Nav.Link>
-          <Nav.Link as={NavLink} to="/leaderboard">Leaderboard</Nav.Link>
-          <Nav.Link as={NavLink} to="/add">New Poll</Nav.Link>
+          <Nav.Link data-testid="home" as={NavLink} to="/">Home</Nav.Link>
+          <Nav.Link data-testid="leaderboard" as={NavLink} to="/leaderboard">Leaderboard</Nav.Link>
+          <Nav.Link data-testid="add" as={NavLink} to="/add">New Poll</Nav.Link>
         </Nav>
         {
           infoAuth.isLoggedIn ?

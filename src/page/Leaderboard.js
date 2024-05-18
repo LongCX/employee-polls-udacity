@@ -34,9 +34,9 @@ const Leaderboard = () => {
                     <tbody>
                         {dataLeaderBoardSort.map((data, index) => (
                             <tr key={index}>
-                                <td><Image style={{ width: '3rem' }} src={listUsers[data.user].avatarURL} roundedCircle /> {listUsers[data.user].name} <Badge bg="secondary">{data.user}</Badge></td>
-                                <td className="text-center">{data.answerCount}</td>
-                                <td className="text-center">{data.questionCount}</td>
+                                <td><Image style={{ width: '3rem' }} src={listUsers[data.user].avatarURL} roundedCircle /> {listUsers[data.user].name} <Badge data-testid="username" bg="secondary">{data.user}</Badge></td>
+                                <td data-testid="answers" className="text-center">{data.answerCount}</td>
+                                <td data-testid="questions" className="text-center">{data.questionCount}</td>
                             </tr>
                         ))}
                     </tbody>
