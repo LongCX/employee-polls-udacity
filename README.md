@@ -5,6 +5,9 @@ This is a react project and it is final of Udacity Frontend Nanodegree course. T
 
 
 ## Screenshots
+![image](https://github.com/LongCX/employee-polls-udacity/assets/38092914/4c0fb0e9-cf99-426f-9b6b-60a94506fe66)
+![image](https://github.com/LongCX/employee-polls-udacity/assets/38092914/bf5b6367-7c5c-4e94-ba77-4e136e618d45)
+![image](https://github.com/LongCX/employee-polls-udacity/assets/38092914/1785216e-b93b-4078-828f-a52104f78009)
 
 
 ## How to start
