@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { loginSuccess } from '../actions';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
@@ -20,6 +20,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const listUsers = useSelector((state) => state.users.users);
+    const { state } = useLocation();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -38,7 +39,7 @@ const Login = () => {
         }
         dispatch(loginSuccess(username));
         setError('');
-        navigate("/");
+        navigate(state?.path || "/");
     };
 
     return (

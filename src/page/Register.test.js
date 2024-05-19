@@ -1,20 +1,7 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { configureStore } from "@reduxjs/toolkit"
-import { BrowserRouter } from 'react-router-dom';
-import { setUsers } from '../actions';
-import rootReducer from '../reducers';
+import { screen, fireEvent, waitFor } from '@testing-library/react';
 import Register from './Register';
-
-const renderWithProviders = (ui) => {
-    const store = configureStore({ reducer: rootReducer });
-    return render(
-        <Provider store={store}>
-            <BrowserRouter>{ui}</BrowserRouter>
-        </Provider>
-    );
-};
+import { renderWithProviders } from '../utils/test-utils';
 
 describe('Register Component', () => {
     it('should have username field, fullname field, password field, and register button', () => {
@@ -36,18 +23,12 @@ describe('Register Component', () => {
     });
 
     it('should show an error message when exist username', async () => {
-        const store = configureStore({ reducer: rootReducer });
         const users = {
             "existuser": {
                 id: 'existuser',
             }
         };
-        store.dispatch(setUsers(users));
-        render(
-            <Provider store={store}>
-                <BrowserRouter><Register /></BrowserRouter>
-            </Provider>
-        );
+        renderWithProviders(<Register />, { preloadedState: { users: { users } } });
 
         fireEvent.change(screen.getByTestId('username'), { target: { value: 'existuser' } });
         fireEvent.change(screen.getByTestId('fullname'), { target: { value: 'fullname' } });

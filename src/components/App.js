@@ -1,6 +1,6 @@
 import { useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import { setUsers, setListQuestions, startLoading, stopLoading, startLoadOnceInitData } from '../actions';
@@ -17,7 +17,6 @@ import Register from "../page/Register";
 
 function App() {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const isLoading = useSelector((state) => state.loading.isLoading);
   const isLoad = useSelector((state) => state.loading.isLoadOnceInitData);
 
@@ -40,8 +39,8 @@ function App() {
       <Fragment>
         <NavigationBar />
         <Routes>
-          <Route path="/login" element={isLoggedIn ? <Navigate replace to="/" /> : <Login />} />
-          <Route path="/register" element={isLoggedIn ? <Navigate replace to="/" /> : <Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<Home />} />
             <Route path="/leaderboard" element={<Leaderboard />} />

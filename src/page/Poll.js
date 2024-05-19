@@ -11,9 +11,9 @@ import Image from 'react-bootstrap/Image';
 import Badge from 'react-bootstrap/Badge';
 import Spinner from 'react-bootstrap/Spinner';
 import { answerVotePoll, answerVoteOfUser, startLoading, stopLoading } from '../actions';
-import NotFound from './NotFound';
 import { _saveQuestionAnswer, _saveQuestionAnswerForNewRegistUser } from '../utils/_DATA'
 import { initUser } from '../utils/helpers';
+import NotFound from './NotFound';
 
 const Poll = () => {
     const [option, setOption] = useState('');
@@ -25,8 +25,8 @@ const Poll = () => {
     const listUsers = useSelector((state) => state.users.users);
     const isLoading = useSelector((state) => state.loading.isLoading);
     const infoPoll = listPolls[questionId];
-    if (typeof infoPoll === "undefined") {
-        return <NotFound />
+    if (!infoPoll) {
+        return <NotFound />;
     }
 
     const btnLoading = <Button variant="primary" disabled><Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />Loading...</Button>

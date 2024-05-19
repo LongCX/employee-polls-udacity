@@ -1,24 +1,12 @@
 import { useSelector } from 'react-redux';
-import Card from 'react-bootstrap/Card';
-import { Link, Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
+import { useLocation, Navigate } from "react-router";
 
 const ProtectedRoute = () => {
     const infoAuth = useSelector((state) => state.authUser);
+    const location = useLocation();
 
-    if (!infoAuth.isLoggedIn) {
-        return (
-            <Card bg="light" className="mx-auto mt-5" style={{ width: '25rem' }}>
-                <Card.Header>Unauthorized </Card.Header>
-                <Card.Body>
-                    <Card.Text>
-                        Need <Link to="/login">Login</Link> or <Link to="/register">Register</Link> to see content
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-        )
-    }
-
-    return <Outlet />
+    return !infoAuth.isLoggedIn ? <Navigate to="/login" replace state={{ path: location.pathname }} /> : <Outlet />;
 }
 
 export default ProtectedRoute;

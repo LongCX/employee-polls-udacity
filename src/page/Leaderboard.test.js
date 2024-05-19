@@ -1,16 +1,11 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { configureStore } from "@reduxjs/toolkit"
-import { BrowserRouter } from 'react-router-dom';
-import rootReducer from '../reducers';
+import { screen } from '@testing-library/react';
 import Leaderboard from './Leaderboard';
-import { setUsers } from '../actions';
+import { renderWithProviders } from '../utils/test-utils';
 
 
 describe("Summary", () => {
     it("Should the leaderboard is displaying the correct user name, number of questions asked, and number of questions answered", async () => {
-        const store = configureStore({ reducer: rootReducer });
         const users = {
             "sarahedo": {
                 id: "sarahedo",
@@ -25,12 +20,7 @@ describe("Summary", () => {
                 questions: ["8xf0y6ziyjabvozdd253nd", "am8ehyc8byjqgar0jgpub9"],
             }
         };
-        store.dispatch(setUsers(users));
-        render(
-            <Provider store={store}>
-                <BrowserRouter><Leaderboard /></BrowserRouter>
-            </Provider>
-        );
+        renderWithProviders(<Leaderboard />, { preloadedState: { users: { users } } });
 
         const username = screen.getByTestId("username");
         const answers = screen.getByTestId("answers");

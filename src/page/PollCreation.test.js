@@ -1,19 +1,7 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { configureStore } from "@reduxjs/toolkit"
-import { BrowserRouter } from 'react-router-dom';
-import rootReducer from '../reducers';
+import { screen, fireEvent, waitFor } from '@testing-library/react';
 import PollCreation from './PollCreation';
-
-const renderWithProviders = (ui) => {
-  const store = configureStore({ reducer: rootReducer });
-  return render(
-    <Provider store={store}>
-      <BrowserRouter>{ui}</BrowserRouter>
-    </Provider>
-  );
-};
+import { renderWithProviders } from '../utils/test-utils';
 
 describe('Poll Creation Component', () => {
   it('should have optionOne field, optionTwo field, and create button', () => {
