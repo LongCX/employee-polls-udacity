@@ -25,7 +25,7 @@ const Poll = () => {
     const listUsers = useSelector((state) => state.users.users);
     const isLoading = useSelector((state) => state.loading.isLoading);
     const infoPoll = listPolls[questionId];
-    if (!infoPoll) {
+    if (!infoPoll || !username) {
         return <NotFound />;
     }
 
